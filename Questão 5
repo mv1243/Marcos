@@ -1,0 +1,20 @@
+using System;
+
+namespace ConsoleApp5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string palavra;
+            Console.WriteLine("Escreva uma string para invertê-la");
+            palavra = Console.ReadLine();
+            char[] carectere = palavra.ToCharArray();
+            for (int i = carectere.Length - 1; i > -1; i--)
+            {
+                Console.Write(carectere[i]);
+            }
+            Console.ReadLine();
+        }
+    }
+}
