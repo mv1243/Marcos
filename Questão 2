@@ -1,0 +1,45 @@
+using System;
+
+namespace ConsoleApp5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int numero_anterior = 0;
+            int numero_atual = 1;
+            int fibonacci;
+            int numero_do_usuario;
+            numero_do_usuario = int.Parse(Console.ReadLine());
+            Console.Clear();
+            bool sequencia = false;
+            for (int i = 0; i < 100; i++)
+            {
+                fibonacci = numero_anterior + numero_atual;
+
+                numero_anterior = numero_atual;
+                numero_atual = fibonacci;
+                if (numero_anterior == numero_do_usuario)
+                {
+                    sequencia = true;
+                }
+                else
+                {
+                    if (numero_do_usuario == 0)
+                    {
+                        sequencia = true;
+                    }
+                }
+            }
+            if (sequencia == true)
+            {
+                Console.WriteLine("O número " + numero_do_usuario + " faz parte da sequência de Fibonacci.");
+            }
+            else
+            {
+                Console.WriteLine("O número " + numero_do_usuario + " não faz parte da sequência de Fibonacci.");
+            }
+            Console.ReadKey();
+        }
+    }
+}
