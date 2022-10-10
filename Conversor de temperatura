@@ -1,0 +1,307 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool continuar = true;
+            bool continuarx = true;
+            bool sucesso;
+            while (continuar)
+            {
+                char ler;
+                Console.WriteLine("Digite A para escolher Celsius, B para escolher Fahrenheit e C para Kelvin");
+                sucesso = char.TryParse(Console.ReadLine().ToUpper(), out ler);
+                Console.Clear();
+                if (sucesso == true)
+                {
+
+                
+                if (ler == 'A')
+                {
+                    continuarx = true;
+                    while (continuarx == true)
+                    {
+                        double celsius;
+                        Console.Write("Digite o valor de Celsius:");
+                        sucesso = double.TryParse(Console.ReadLine(), out celsius);
+
+                        if (sucesso == false)
+                        {
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Error. Só pode haver números.");
+                            Console.ResetColor();
+                            Console.WriteLine("Pressione qualquer tecla para voltar");
+                            Console.ReadKey();
+
+                            Console.Clear();
+
+                        }
+                        else
+                        {
+
+
+
+                            Console.WriteLine("digite A para converter para Fahrenheit e B para converter Kelvin ou C para voltar.");
+                            sucesso = char.TryParse(Console.ReadLine().ToUpper(), out ler);
+                                if (sucesso == true)
+                                {
+                                    if (ler == 'A')
+                                    {
+                                        celsius = (celsius * 1.8) + 32;
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.WriteLine("Resultado:°F" + Math.Round(celsius));
+                                        Console.ResetColor();
+                                        Console.WriteLine("Pressione qualquer tecla para voltar");
+                                        Console.ReadKey();
+                                        continuarx = false;
+                                        Console.Clear();
+
+                                    }
+                                    else
+                                    {
+                                        if (ler == 'B')
+                                        {
+                                            celsius = celsius + 273;
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("Resultado:K" + Math.Round(celsius));
+                                            Console.ResetColor();
+                                            Console.WriteLine("Pressione qualquer tecla para voltar");
+                                            Console.ReadKey();
+                                            continuarx = false;
+                                            Console.Clear();
+                                        }
+                                        else
+                                        {
+                                            if (ler == 'C')
+                                            {
+
+                                                continuarx = false;
+                                                Console.Clear();
+                                            }
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Red;
+                                                Console.WriteLine("Erro. Nenhuma das opções foram selecionadas.");
+                                                Console.WriteLine("Pressione qualquer tecla para voltar.");
+                                                Console.ResetColor();
+                                                Console.ReadKey();
+                                                Console.Clear();
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Erro. Nenhuma das opções foram selecionadas.");
+                                    Console.WriteLine("Pressione qualquer tecla para voltar.");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                }
+                           
+                        }
+                    }
+                }
+                else
+                {
+                    if (ler == 'B')
+                {
+                    continuarx = true;
+                    while (continuarx == true)
+                    {
+                        double fahrenheit;
+                        Console.Write("Digite o valor de Fahrenheit:");
+                        sucesso = double.TryParse(Console.ReadLine(), out fahrenheit);
+                        if (sucesso == false)
+                        {
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Error. Só pode haver números.");
+                            Console.ResetColor();
+                            Console.WriteLine("Pressione qualquer tecla para voltar");
+                            Console.ReadKey();
+
+                            Console.Clear();
+
+                        }
+                        else
+                        {
+
+
+
+                            Console.WriteLine("digite A para converter para Celsius e B para converter Kelvin ou C para voltar.");
+                            sucesso = char.TryParse(Console.ReadLine().ToUpper(), out ler);
+                                    if (sucesso == true)
+                                    {
+                                        if (ler == 'A')
+                                        {
+                                            fahrenheit = (fahrenheit - 32) / 1.8;
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("Resultado:°C" + Math.Round(fahrenheit));
+                                            Console.ResetColor();
+                                            Console.WriteLine("Pressione qualquer tecla para voltar");
+                                            Console.ReadKey();
+                                            continuarx = false;
+                                            Console.Clear();
+
+                                        }
+                                        else
+                                        {
+                                            if (ler == 'B')
+                                            {
+                                                fahrenheit = ((fahrenheit - 32) / 1.8) + 273;
+                                                Console.ForegroundColor = ConsoleColor.Green;
+                                                Console.WriteLine("Resultado:K" + Math.Round(fahrenheit));
+                                                Console.ResetColor();
+                                                Console.WriteLine("Pressione qualquer tecla para voltar");
+                                                Console.ReadKey();
+                                                continuarx = false;
+                                                Console.Clear();
+                                            }
+                                            else
+                                            {
+                                                if (ler == 'C')
+                                                {
+
+                                                    continuarx = false;
+                                                    Console.Clear();
+                                                }
+                                                else
+                                                {
+                                                    Console.ForegroundColor = ConsoleColor.Red;
+                                                    Console.WriteLine("Erro. Nenhuma das opções foram selecionadas.");
+                                                    Console.WriteLine("Pressione qualquer tecla para voltar.");
+                                                    Console.ResetColor();
+                                                    Console.ReadKey();
+                                                    Console.Clear();
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        Console.WriteLine("Erro. Nenhuma das opções foram selecionadas.");
+                                        Console.WriteLine("Pressione qualquer tecla para voltar.");
+                                        Console.ResetColor();
+                                        Console.ReadKey();
+                                        Console.Clear();
+                                    }
+                        }
+                    }
+                }
+                    else
+                    {
+                        if (ler == 'C')
+                        {
+                            continuarx = true;
+                            while (continuarx == true)
+                            {
+                                double kelvin;
+                                Console.Write("Digite o valor de Kelvin:");
+                                sucesso = double.TryParse(Console.ReadLine(), out kelvin);
+                                if (sucesso == false)
+                                {
+
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Error. Só pode haver números.");
+                                    Console.ResetColor();
+                                    Console.WriteLine("Pressione qualquer tecla para voltar");
+                                    Console.ReadKey();
+
+                                    Console.Clear();
+
+                                }
+                                else
+                                {
+
+
+
+                                    Console.WriteLine("digite A para converter para Celsius e B para converter Fahrenheit ou C para voltar.");
+                                    sucesso = char.TryParse(Console.ReadLine().ToUpper(), out ler);
+                                        if (sucesso == true)
+                                        {
+                                            if (ler == 'A')
+                                            {
+                                                kelvin = kelvin - 273;
+                                                Console.ForegroundColor = ConsoleColor.Green;
+                                                Console.WriteLine("Resultado:°C" + Math.Round(kelvin));
+                                                Console.ResetColor();
+                                                Console.WriteLine("Pressione qualquer tecla para voltar");
+                                                Console.ReadKey();
+                                                continuarx = false;
+                                                Console.Clear();
+
+                                            }
+                                            else
+                                            {
+                                                if (ler == 'B')
+                                                {
+                                                    kelvin = 1.8 * (kelvin - 273) + 32;
+                                                    Console.ForegroundColor = ConsoleColor.Green;
+                                                    Console.WriteLine("Resultado:K" + Math.Round(kelvin));
+                                                    Console.ResetColor();
+                                                    Console.WriteLine("Pressione qualquer tecla para voltar");
+                                                    Console.ReadKey();
+                                                    continuarx = false;
+                                                    Console.Clear();
+                                                }
+                                                else
+                                                {
+                                                    if (ler == 'C')
+                                                    {
+
+                                                        continuarx = false;
+                                                        Console.Clear();
+                                                    }
+                                                    else
+                                                    {
+                                                        Console.ForegroundColor = ConsoleColor.Red;
+                                                        Console.WriteLine("Erro. Nenhuma das opções foram selecionadas.");
+                                                        Console.WriteLine("Pressione qualquer tecla para voltar.");
+                                                        Console.ResetColor();
+                                                        Console.ReadKey();
+                                                        Console.Clear();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.WriteLine("Erro. Nenhuma das opções foram selecionadas.");
+                                            Console.WriteLine("Pressione qualquer tecla para voltar.");
+                                            Console.ResetColor();
+                                            Console.ReadKey();
+                                            Console.Clear();
+                                        }
+                                    
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Erro. Nenhuma das opções foram selecionadas.");
+                    Console.WriteLine("Pressione qualquer tecla para voltar.");
+                    Console.ResetColor();
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+
+            }
+        }
+    }
+}
