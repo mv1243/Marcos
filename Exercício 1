@@ -1,0 +1,192 @@
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        // 1. A prefeitura de uma cidade resolveu fazer uma pesquisa entre os seus
+        // trabalhadores. Para isso ela coletou alguns dados como idade, sexo (M ou F) e salário. 
+        // Crie um algoritmo que leia estes dados e que escreva ao final:
+        // a) a média salarial dos homens, a média salarial das mulheres
+        // b) o maior salário encontrado entre as pessoas abaixo de 30 anos.
+        // Obs: O final da leitura de dados é marcado por uma idade negativa.
+
+        // Pergunta para o Júnior, varíavel char tem quer igual M ou F, se não for igual, vai pro catch
+
+        static void Main(string[] args)
+        {
+
+            List<Funcionario> funcionarios = new List<Funcionario>();
+            Menu(funcionarios);
+            Algoritmo(funcionarios);
+
+
+
+        }
+
+        static void Algoritmo(List<Funcionario> funcionarios)
+        {
+            int mulher = 0;
+            double mediamulher = 0;
+            int homem = 0;
+            double mediahomem = 0;
+            double maiorsalario = 0;
+            int trinta = 0;
+
+            for (int i = 0; i < funcionarios.Count; i++)
+            {
+                if (funcionarios[i].genero == 'F')
+                {
+                    mulher = mulher + 1;
+                    mediamulher = mediamulher + funcionarios[i].salario;
+                }
+                else
+                {
+                    homem = homem + 1;
+                    mediahomem = mediahomem + funcionarios[i].salario;
+                }
+                if (funcionarios[i].idade < 30)
+                {
+                    trinta = trinta + 1;
+                    if (funcionarios.Count == 1)
+                    {
+                        maiorsalario = funcionarios[i].salario;
+                    }
+                    if (i > funcionarios.Count - 1 && funcionarios[i].salario > funcionarios[i + 1].salario)
+                    {
+                        maiorsalario = funcionarios[i].salario;
+                    }
+                    else
+                    {
+                        if (i > funcionarios.Count - 1 && funcionarios[i].salario < funcionarios[i + 1].salario)
+                        {
+                            maiorsalario = funcionarios[i + 1].salario;
+                        }
+
+                    }
+
+                }
+
+            }
+            int trinta1 = trinta;
+            double maiorsalario1 = maiorsalario;
+            double mediatotalh = mediahomem / homem;
+            double mediatotalm = mediamulher / mulher;
+            if (homem == 0)
+            {
+                Console.WriteLine("Média das homem:Não há homem.");
+            }
+            else
+            {
+                Console.WriteLine("Média das homem:" + mediatotalh);
+            }
+
+
+            if (mulher == 0)
+            {
+                Console.WriteLine("Média das mulheres:Não há mulheres.");
+            }
+            else
+            {
+                Console.WriteLine("Média das mulheres:" + mediatotalm);
+            }
+            if (trinta1 == 0)
+            {
+                Console.WriteLine("nâo há funcionários abaixo de 30 anos");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("maior salário encontrado de um funcionario abaixo de trinta anos:" + maiorsalario1);
+            }
+        }
+        static void Menu(List<Funcionario> funcionarios)
+        {
+
+            int idade;
+            char genero;
+            double salario;
+            bool continuar = true;
+
+            while (continuar == true)
+            {
+                try
+                {
+                    if (funcionarios.Count == 0)
+                    {
+                        Console.WriteLine("funcionários cadastrados:nenhuma");
+                    }
+                    else
+                    {
+                        Console.WriteLine("funcionários cadastrados:" + funcionarios.Count);
+                    }
+                    Console.WriteLine("Digite o Genêro, F para femenino, M para masculino.");
+                    genero = Convert.ToChar(Console.ReadLine().ToUpper());
+                    if (genero == 'F' || genero == 'M')
+                    {
+                        Console.WriteLine("Digite o salário.");
+                        salario = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("digite a idade, se a idade for negativa, o algoritmo para. ");
+                        idade = Convert.ToInt32(Console.ReadLine());
+                        if (idade <= 0)
+                        {
+                            idade = idade * -1;
+                            funcionarios.Add(new Funcionario
+                            {
+
+                                idade = idade,
+                                genero = genero,
+                                salario = salario
+
+
+
+                            });
+                            continuar = false;
+
+
+                        }
+                        else
+                        {
+                            funcionarios.Add(new Funcionario
+                            {
+
+                                idade = idade,
+                                genero = genero,
+                                salario = salario
+
+                            });
+                            Console.Clear();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Erro, o Usuário digitou o caractere errado.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Erro no aplicativo.");
+                    Console.ReadKey();
+                    Console.Clear();
+
+                }
+
+
+            }
+
+
+
+        }
+        public class Funcionario
+        {
+            public int idade { get; set; }
+            public char genero { get; set; }
+            public double salario { get; set; }
+
+
+        }
+    }
+}
