@@ -1,0 +1,138 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    //   2. Crie um algoritmo que leia uma quantidade não determinada de números inteiros.O
+    //programa deve calcular e escrever a quantidade de números pares e ímpares e a
+    //média aritmética dos números pares.A leitura deve ser encerrada quando for lido o
+    //número zero, que não deve ser considerado
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numeros = new List<int>();
+            int par = 0;
+            int impar = 0;
+            double media_aritmetica = 0;
+            Menu(numeros);
+            Algoritmo(numeros, ref par, ref impar, ref media_aritmetica);
+            Par(numeros, ref par);
+            Impar(numeros, ref impar);
+            Media_Aritmetica(numeros, ref media_aritmetica);
+
+
+
+        }
+        static void Menu(List<int> numeros)
+        {
+            bool continuar = true;
+            int numero;
+            while (continuar)
+            {
+                try
+                {
+                    Console.WriteLine("Digite um Número.");
+                    numero = Convert.ToInt32(Console.ReadLine());
+                    if (numero != 0)
+                    {
+                        numeros.Add(numero);
+                    }
+                    else
+                    {
+                        continuar = false;
+                    }
+
+
+                }
+                catch (Exception)
+                {
+
+
+                }
+            }
+        }
+        static void Algoritmo(List<int> numeros, ref int par, ref int impar, ref double media_aritmetica)
+        {
+            int total = 0;
+            media_aritmetica = numeros.Count;
+            for (int i = 0; i < numeros.Count; i++)
+            {
+                if (numeros[i] % 2 == 0)
+                {
+                    par = par + 1;
+                }
+                else
+                {
+                    impar = impar + 1;
+                }
+                total = total + numeros[i];
+            }
+            media_aritmetica = total / media_aritmetica;
+           
+        }
+        static void Par(List<int> numeros, ref int par)
+        {
+          
+            if (numeros.Count > 0)
+            {  
+
+                if (par > 0)
+                {
+                    Console.WriteLine("Numeros Pares:" + par);
+                }
+                else
+                {
+                    Console.WriteLine("Nùmero Pares:Não há numeros Pares.");
+                }
+            }
+            else
+            {
+
+                Console.WriteLine("Nùmero Pares:Nenhum número foi lido.");
+
+            }
+
+        }
+        static void Impar(List<int> numeros, ref int impar)
+        {
+            int impar1 = impar;
+            if (numeros.Count > 0)
+            {
+                if (impar > 0)
+                {
+                    Console.WriteLine("Numeros Impares:" + impar1);
+                }
+                else
+                {
+                    Console.WriteLine("Nùmero Impares:Não há numeros pares");
+                }
+            }
+            else
+            {
+
+                Console.WriteLine("Nùmero Impares:Nenhum número foi lido.");
+
+            }
+        }       
+        static void Media_Aritmetica(List<int> numeros, ref double media_aritmetica)
+        {
+            double media_aritmetica1 = media_aritmetica;
+
+            if (numeros.Count > 0)
+            {
+                Console.WriteLine("Média Aritmética:" + media_aritmetica1);
+            }
+            else
+            {
+                Console.WriteLine("Média Aritmética:Nenhum Número foi Lido");
+            }
+
+
+        }
+    }
+}
