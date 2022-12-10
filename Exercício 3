@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+//    3. Crie um algoritmo que leia a quantidade e o preço de 50 produtos comprados por
+//    uma empresa.Ao final deve ser escrito o total gasto pela empresa
+
+
+    class Program
+    {
+       
+        static void Main(string[] args)
+        {
+            List<Product> products = new List<Product>();
+            int total = 0;
+            
+            Algorithm(products, ref total);
+           
+            Console.WriteLine("Total gasto da empresa:R$" + total );
+            Console.ReadLine();
+
+        }
+
+        class Product
+        {
+          public int quantity { get; set; }
+          public int price { get; set; }
+        }
+
+        static void Algorithm(List<Product> products, ref int total)
+        {
+            Random rnd = new Random();
+            
+
+            for (int i = 0; i < 50; i++)
+            {
+                int quantity = rnd.Next(1, 10);
+                int price = rnd.Next(1, 50) * 10;               
+                products.Add(new Product { quantity = quantity, price = price});
+                total = quantity * price + total;
+            }
+            
+
+
+        }
+        
+
+    }
+}
