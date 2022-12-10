@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    // Crie um algoritmo que leia 2 números inteiros positivos, A e B, e que calcule a soma
+    //de todos os números compreendidos entre eles.Os valores A e B não devem ser
+    //considerados no somatório. Caso A seja maior do que B deve ser enviada uma
+    //mensagem para o usuário informando que a soma não será realizada.
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            bool success = true;
+
+            while (success == true)
+            {
+                try
+                {
+                    Console.Write("Digite o PRIMEIRO número:");
+                    int A = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Digite o SEGUNDO número:");
+                    int B = Convert.ToInt32(Console.ReadLine());
+
+                    if (A > 0 && B > 0)
+                    {
+                        if (A > B)
+                        {
+                            Console.WriteLine("A é maior que B, logo, a soma não será realizada.");
+                        }
+                        else
+                        {
+                            Algorithm(ref A, ref B);
+                            Console.ReadLine();
+                            success = false;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error, o usuário digitou um número negativo.");
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    Console.WriteLine("Error, o usuário não digitou um número.");
+                }
+
+
+            }
+
+
+        }
+
+
+
+        static void Algorithm(ref int A, ref int B)
+        {
+
+
+            int C = B - A;
+            int D = B;
+            int total = 0;
+
+            for (int i = 1; i < C; i++)
+            {
+                D = D - 1;
+                total = D + total;
+            }
+
+            Console.WriteLine("Total:" + total);
+
+        }
+
+
+    }
+}
