@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    //Crie um algoritmo que leia 2 números inteiros positivos, A e B, e que calcule a soma
+    //de todos os números múltiplos de 4 compreendidos entre eles.Os valores A e B não
+    //devem ser considerados no somatório.Caso A seja maior do que B deve ser enviada
+    //uma mensagem para o usuário informando que a soma não será realizada
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            bool success = true;
+            while (success == true)
+            {
+
+                try
+                {
+                    Console.WriteLine("Digite o valor de A");
+                    int A = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Digite o valor de B");
+                    int B = Convert.ToInt32(Console.ReadLine());
+                    if (B > A)
+                    {
+                        Algorithm(ref A, ref B);
+                        success = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Soma não será realizada, pois o número A é maior que B");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+                catch (Exception)
+                {
+
+                    Console.WriteLine("Error, apenas números podem ser inseridos.");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+
+
+            }
+        }
+
+
+        static void Algorithm(ref int A, ref int B)
+        {
+
+            int C = B - (A + 1);
+            int D = B - 1;
+            int count = 0;
+            for (int i = 0; i < C; i++)
+            {
+                if (D % 4 == 0)
+                {
+                    count++;
+                }
+                D--;
+            }
+
+            if (count > 0)
+            {
+                Console.WriteLine("Números múltiplos por 4: " + count);
+            }
+            else
+            {
+                Console.WriteLine("Números múltiplos por 4 :0");
+            }
+        }
+
+
+    }
+}
+
+
