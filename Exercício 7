@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+//    Crie um algoritmo que calcule a soma dos primeiros 50 números pares.Os
+// primeiros números pares são: 2, 4, 6, ...
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            int par = 2;
+            int resposta = 0;
+            Algorithm(ref par, ref resposta);
+            Console.WriteLine("A soma dos primeiros 50 números pares é:" + resposta);
+            Console.ReadKey();
+
+        }
+
+
+        static void Algorithm(ref int par, ref int resposta)
+        {
+            
+            
+            for (int i = 0; i < 49; i++)
+            {
+                int sucessor = par + 2;
+                resposta = par + sucessor;
+                par = sucessor;
+            }
+            
+
+        }
+
+
+    }
+}
