@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    //Uma empresa lançou um novo produto no mercado e fez uma pesquisa para saber
+    //se os consumidores estavam satisfeitos, para isso eles deveriam responder sim ‘S’ ou
+    //não ‘N’. Crie um algoritmo que leia a resposta de todas as pessoas e escreva a
+    //porcentagem dos que disseram sim e dos que disseram não.
+    //Obs: O final da leitura de dados é marcado pela resposta ‘F
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            bool success = true;
+            int s = 0;
+            int n = 0;
+            double percent_s = 0;
+            double percent_n = 0;
+
+            while (success == true)
+            {
+                Console.WriteLine("Pesquisa:");
+                Console.WriteLine("Digite S se o usuário estar satisfeito com o produto e N se não não estar satisfeito e F para finalizar a pesquisa.");
+                try
+                {
+                    char ask = Convert.ToChar(Console.ReadLine().ToUpper());
+                    switch (ask)
+                    {
+                        case 'S':
+                            s++;
+                            Console.Clear();
+                            break;
+
+                        case 'N':
+                            n++;
+                            Console.Clear();
+                            break;
+
+                        case 'F':
+                            Algorithm(s, n, ref percent_s, ref percent_n);
+                            Console.WriteLine("Porcentagem S:%" + percent_s);
+                            Console.WriteLine("Porcentagem N:%" + percent_n);
+                            Console.ReadLine();
+                            success = false;
+                            break;
+
+                        default:
+                            Console.WriteLine("O usuário digitou o caractere incorreto.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Erro, o usuário digitou mais de caractere.");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+        }
+
+
+        static void Algorithm(int s, int n, ref double percent_s, ref double percent_n)
+        {
+            int total = s + n;
+            percent_s = (s * 100) / total;
+            percent_n = (n * 100) / total;
+        }
+    }
+}
