@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+// Crie um algoritmo que:
+//a) Leia a idade de várias pessoas.O final da lista contém o valor da idade igual a 
+//-1 que deverá ser computado.
+//b) Calcule e mostre a idade média desse grupo de indivíduos.Escreva também a
+//porcentagem de pessoas entre 21 e 65 anos inclusive
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            List<int> age = new List<int>();
+            int read;
+            double media;
+            double percent;
+            bool success = true;
+            while (success == true)
+            {
+                try
+                {
+                    Console.WriteLine("Digite a idade de várias pessoas para saber a média de todo o grupo e a porcentagem da pessoas");
+                    Console.WriteLine("entre 21 a 65 anos, caso a idade for -1 irá retorna o resultado.");
+                    Console.WriteLine("Número atual de pessoas:" + age.Count);
+                    read = Convert.ToInt32(Console.ReadLine());
+                    if (read >= 0)
+                    {
+                        age.Add(read);
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        if (read == -1)
+                        {
+                            age.Add(read);
+                            media = Media(age);
+                            Console.WriteLine("A idade média das pessoas é:" + media);
+                            percent = Percent(age);
+                            Console.WriteLine("Porcentagem de pessoas entre 21 a 65 anos:%" + percent);
+
+                            success = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Número negativo que não seja -1, será inválido.");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Erro, o usuário não digitou um número.");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+        }
+
+
+        static double Media(List<int> age)
+        {
+            double media = 0;
+            for (int i = 0; i < age.Count; i++)
+            {
+                media = age[i] + media;
+            }
+            media = media / age.Count;
+
+            return media;
+        }
+        static double Percent(List<int> age) 
+        {
+            int people = 0;
+            
+            for (int i = 0; i < age.Count; i++)
+            {
+                if (age[i] >= 21 && age[i] <= 65 )
+                {
+                    people++;
+                   
+                }
+                
+            }
+            double percent = (people * 100) / age.Count;
+
+            return percent;
+        }
+    }
+}
