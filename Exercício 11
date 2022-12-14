@@ -1,0 +1,137 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    // Crie um algoritmo de caixa eletrônico que lê a quantidade de dinheiro a ser sacado
+    // e imprime a menor quantidade de notas a ser dada ao usuário.Assume-se que existam
+    //notas de 50, 20, 10, 5 e 1. Imprimir também a quantidade de cada nota a ser dada ao
+    //usuário.O final da leitura é marcado pelo valor 0 que não deve ser calculado.
+    //Exemplo: 98 = uma nota de 50, duas notas de 20, uma nota de 5, e três notas de 1.
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            int nota1 = 0;
+            int nota2 = 0;
+            int nota5 = 0;
+            int nota10 = 0;
+            int nota20 = 0;
+            int nota50 = 0;
+
+            bool success = true;
+            while (success == true)
+            {
+
+
+                try
+                {
+
+                    Console.WriteLine("Caixa eletrônico:");
+                    Console.WriteLine("Escolha um valor inteiro, que retorna a menor quantidade de notas (50, 20, 10, 5 e 1)");
+                    Console.Write("Valor escolhido:");
+                    int number = Convert.ToInt32(Console.ReadLine());
+                    if (number >= 0)
+                    {
+                        Algorithm(number, ref nota1, ref nota2, ref nota5, ref nota10, ref nota20, ref nota50);
+                        Console.Write(nota50 + " notas de R$50,00, ");
+                        Console.Write(nota20 + " notas de R$20,00, ");
+                        Console.Write(nota10 + " notas de R$10,00, ");
+                        Console.Write(nota5 + " notas de R$5,00, ");
+                        Console.Write(nota2 + " notas de R$2,00, ");
+                        Console.Write(nota1 + " notas de R$1,00 e ");
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        nota1 = 0;
+                        nota2 = 0;
+                        nota5 = 0;
+                        nota10 = 0;
+                        nota20 = 0;
+                        nota50 = 0;
+                    }
+                    else
+                    {
+                        Console.WriteLine("O usuário digitou um número negativo");
+                        Console.ReadLine();
+                        Console.Clear();
+                    }
+
+
+                }
+
+                catch (Exception)
+                {
+
+                    Console.WriteLine("O usuário não digitou um número.");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                }
+            }
+        }
+
+
+        static void Algorithm(int number, ref int nota1, ref int nota2, ref int nota5, ref int nota10, ref int nota20, ref int nota50)
+        {
+            int notas = 0;
+
+            bool success = true;
+            while (success == true)
+            {
+                if (number >= 50 && notas + 50 <= number)
+                {
+                    notas = notas + 50;
+                    nota50 = nota50 + 1;
+                }
+                else
+                {
+                    if (number >= 20 && notas + 20 <= number)
+                    {
+                        notas = notas + 20;
+                        nota20 = nota20 + 1;
+                    }
+                    else
+                    {
+                        if (number >= 10 && notas + 10 <= number)
+                        {
+                            notas = notas + 10;
+                            nota10 = nota10 + 1;
+                        }
+                        else
+                        {
+                            if (number >= 5 && notas + 5 <= number)
+                            {
+                                notas = notas + 5;
+                                nota5 = nota5 + 1;
+                            }
+                            else
+                            {
+                                if (number >= 2 && notas + 2 <= number)
+                                {
+                                    notas = notas + 2;
+                                    nota2 = nota2 + 1;
+                                }
+                                else
+                                {
+                                    if (number >= 1 && notas + 1 <= number)
+                                    {
+                                        notas = notas + 1;
+                                        nota1 = nota1 + 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (notas == number)
+                {
+                    success = false;
+                }
+            }
+        }
+    }
+}
