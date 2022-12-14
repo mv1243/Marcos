@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    // Crie um algoritmo que leia um número N e verifique se ele é primo
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            string primo;
+            bool success = true;
+            while (success == true)
+            {
+
+
+                try
+                {
+                    Console.WriteLine("Digite um número para verificar se ele é primo ou não.");
+                    int number = Convert.ToInt32(Console.ReadLine());
+                    primo = Algorithm(number);
+                    Console.WriteLine("Numéro " + primo);
+                    Console.WriteLine();
+
+                    
+                }
+
+                catch (Exception)
+                {
+
+                    Console.WriteLine("O usuário não digitou um número.");
+                    Console.ReadKey();
+                    Console.Clear();
+
+                }
+            }
+        }
+
+
+        static string Algorithm(int number)
+        {
+            string primo = "primo";
+            if (number == 1)
+            {
+                primo = "não é primo";
+            }
+            else
+            {
+                if (number % 2 == 0 && number != 2)
+                {
+                    primo = "não é primo";
+                }
+                else
+                {
+                    if (number % 3 == 0 && number != 3)
+                    {
+                        primo = "não é primo";
+                    }
+                    else
+                    {
+                        if (number % 5 == 0 && number != 5)
+                        {
+                            primo = "não é primo";
+                        }
+                    }
+                }
+            }
+            return primo;
+        }
+    }
+}
+
+
