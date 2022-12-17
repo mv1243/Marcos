@@ -232,7 +232,12 @@ namespace ConsoleApp1
                             for (int i = cartacpu; i < cartas.Count; i++)
                             {
                                 totalcpu = cartas[i].valor_carta + totalcpu;
-                                if (cartas[i].carta == "Ás" && totalcpu > 21)
+
+                                
+                            }
+                            for (int j = 0; j < cartas.Count; j++)
+                            {
+                                if (cartas[j].carta == "Ás" && totalcpu > 21)
                                 {
                                     totalcpu = totalcpu - 10;
                                 }
@@ -264,7 +269,11 @@ namespace ConsoleApp1
                                     for (int i = cartacpu; i < cartas.Count; i++)
                                     {
                                         totalcpu = cartas[i].valor_carta + totalcpu;
-                                        if (cartas[i].carta == "Ás" && totalcpu > 21)
+                                        
+                                    }
+                                    for (int j = 0; j < cartas.Count; j++)
+                                    {
+                                        if (cartas[j].carta == "Ás" && totalcpu > 21)
                                         {
                                             totalcpu = totalcpu - 10;
                                         }
