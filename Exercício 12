@@ -1,0 +1,408 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Security.Cryptography;
+
+namespace ConsoleApp1
+{
+    //    Implemente o jogo Blackjack ou 21. No caso temos apenas dois jogadores, o cliente
+    //(humano) e a banca(computador). O ás pode valer 1 ou 11, de acordo com as cartas
+    //que o jogador possui.O valete(J), a dama(Q) e o rei(K) valem 10. A simulação da
+    //obtenção das cartas deve ser feita com o uso de números aleatórios
+    //(Dica: carta  RAND(12) +1, isto é, variando de 1 a 13).
+    //Os números 11, 12 e 13 representam respectivamente J, Q e K.Não há a necessidade
+    //de representar um baralho real de 52 cartas.O cliente recebe inicialmente duas cartas
+    //aleatoriamente e decide se pede outra ou não, dependendo do somatório.Caso a
+    //soma das cartas seja maior que 21, o cliente perde.O cliente pode passar a vez para a
+    //banca(que não possui cartas no início do jogo), que, para vencer, terá que obter
+    //obrigatoriamente um número maior que o cliente e MENOR do que 21, caso contrário,
+    //o cliente ganha.O jogo tem apenas uma rodada.Informe quem ganhou ou se houve
+    //empate.
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            bool success = true;
+            Console.WriteLine("Bem vindo ao jogo 21, a seguir, o jogador irá jogar contra máquina que só poderá sacar às cartas depois do jogador");
+            Console.WriteLine("encerrar sua jogada, as instruções irão ser intruduzidas quando jogador iniciar uma partida.");
+            Console.WriteLine("pressione qualquer tecla para começar.");
+            Console.ReadKey();
+            Console.WriteLine();
+            List<Carta> cartas = new List<Carta>();
+            MaoJ(cartas);
+
+            while (success == true)
+            {
+                int totalj = RodadaJ(cartas);
+                Console.WriteLine();
+                Console.WriteLine("Pressiona 'C' para sacar uma carta, e 'E' para encerrar sua rodada.");
+                string ler = Console.ReadLine().ToUpper();
+                switch (ler)
+                {
+                    case "C":
+                        if (totalj > 21)
+                        {
+                            Console.WriteLine("O jogador não pode mais sacar cartas, pois passou de 21");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            SacarCarta(cartas);
+                        }
+
+                        break;
+                    case "E":
+                        int cartacpu = cartas.Count;
+                        MaoCPU(cartas);
+                        int totalcpu;
+                        totalcpu = RodadaCPU(cartas, ref cartacpu, totalj);
+                        Resultado(ref cartas, totalj, totalcpu);
+                        Console.ReadLine();
+                        break;
+
+                    default:
+                        Console.WriteLine("O jogador não digitou uma das opções");
+                        Console.WriteLine("Retornando...");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                }
+                Console.Clear();
+            }
+        }
+
+        static string Naipe(int naipe)
+        {
+            string n = "";
+            switch (naipe)
+            {
+                case 1:
+                    n = "coraçôes";
+                    break;
+
+                case 2:
+                    n = "ouros";
+                    break;
+                case 3:
+                    n = "espadas";
+                    break;
+                case 4:
+                    n = "paus";
+                    break;
+            }
+            return n;
+        }
+
+        static void Cartas(ref string carta, ref int valor_carta)
+        {
+            switch (valor_carta)
+            {
+                case 1:
+                    carta = "Ás";
+                    valor_carta = 11;
+                    break;
+                case 2:
+                    carta = "2";
+                    break;
+                case 3:
+                    carta = "3";
+                    break;
+                case 4:
+                    carta = "4";
+                    break;
+                case 5:
+                    carta = "5";
+                    break;
+                case 6:
+                    carta = "6";
+                    break;
+                case 7:
+                    carta = "7";
+                    break;
+                case 8:
+                    carta = "8";
+                    break;
+                case 9:
+                    carta = "9";
+                    break;
+                case 10:
+                    carta = "10";
+                    break;
+                case 11:
+                    carta = "J (Valete)";
+                    valor_carta = 10;
+                    break;
+                case 12:
+                    carta = "Q (Rainha)";
+                    valor_carta = 10;
+                    break;
+                case 13:
+                    carta = "K (Rei)";
+                    valor_carta = 10;
+                    break;
+            }
+
+        }
+
+        static void MaoJ(List<Carta> cartas)
+        {
+            SacarCarta(cartas);
+            SacarCarta(cartas);
+
+        }
+
+        static int RodadaJ(List<Carta> cartas)
+        {
+            int totalj = 0;
+
+            Console.WriteLine("Mão do jogador:");
+            for (int i = 0; i < cartas.Count; i++)
+            {
+                Console.WriteLine(cartas[i].carta + " de " + cartas[i].naipe);
+                totalj = cartas[i].valor_carta + totalj;
+
+            }
+            for (int i = 0; i < cartas.Count; i++)
+            {
+                if (cartas[i].carta == "Ás" && totalj > 21)
+                {
+                    totalj = totalj - 10;
+                }
+            }
+            Console.WriteLine("Pontuação atual do jogador:" + totalj);
+            return totalj;
+        }
+
+        static void MaoCPU(List<Carta> cartas)
+        {
+            SacarCarta(cartas);
+            SacarCarta(cartas);
+        }
+
+        static int RodadaCPU(List<Carta> cartas, ref int cartacpu, int totalj)
+        {
+            int totalcpu = 0;
+            for (int i = cartacpu; i < cartas.Count; i++)
+            {
+                totalcpu = cartas[i].valor_carta + totalcpu;
+                if (cartas[i].carta == "Ás" && totalcpu > 21)
+                {
+                    totalcpu = totalcpu - 10;
+                }
+            }
+
+            bool success = true;
+            while (success == true)
+            {
+                if (totalcpu == 21)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Mão da maquina:");
+                    for (int i = cartacpu; i < cartas.Count; i++)
+                    {
+                        Console.WriteLine(cartas[i].carta + " de " + cartas[i].naipe);
+                    }
+                    Console.WriteLine("Pontuação atual do maquina:" + totalcpu);
+                    success = false;
+                }
+                else
+                {
+                    if (totalj > 21)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Mão da maquina:");
+                        for (int i = cartacpu; i < cartas.Count; i++)
+                        {
+                            Console.WriteLine(cartas[i].carta + " de " + cartas[i].naipe);
+                        }
+                        Console.WriteLine("Pontuação atual do maquina:" + totalcpu);
+                        success = false;
+                    }
+                    else
+                    {
+                        if (totalcpu < totalj && totalj <= 21)
+                        {
+
+                            totalcpu = 0;
+                            SacarCarta(cartas);
+                            for (int i = cartacpu; i < cartas.Count; i++)
+                            {
+                                totalcpu = cartas[i].valor_carta + totalcpu;
+                                if (cartas[i].carta == "Ás" && totalcpu > 21)
+                                {
+                                    totalcpu = totalcpu - 10;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (totalcpu > 21)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Mão da maquina:");
+                                for (int i = cartacpu; i < cartas.Count; i++)
+                                {
+                                    Console.WriteLine(cartas[i].carta + " de " + cartas[i].naipe);
+                                }
+                                Console.WriteLine("Pontuação atual do maquina:" + totalcpu);
+                                if (totalcpu > 21)
+                                {
+                                    success = false;
+                                }
+
+                            }
+                            else
+                            {
+                                if (totalcpu == totalj && totalj < 21)
+                                {
+                                    totalcpu = 0;
+                                    SacarCarta(cartas);
+                                    for (int i = cartacpu; i < cartas.Count; i++)
+                                    {
+                                        totalcpu = cartas[i].valor_carta + totalcpu;
+                                        if (cartas[i].carta == "Ás" && totalcpu > 21)
+                                        {
+                                            totalcpu = totalcpu - 10;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Mão da maquina:");
+                                    for (int i = cartacpu; i < cartas.Count; i++)
+                                    {
+                                        Console.WriteLine(cartas[i].carta + " de " + cartas[i].naipe);
+                                    }
+                                    Console.WriteLine("Pontuação atual do maquina:" + totalcpu);
+                                    success = false;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            return totalcpu;
+        }
+
+        static void Resultado(ref List<Carta> cartas, int totalj, int totalcpu)
+        {
+            Console.WriteLine();
+            if (totalj <= 21 && totalj > totalcpu)
+            {
+                Console.WriteLine("Vitória do Jogador");
+                Console.WriteLine("Encerrando-se a rodada.");
+
+                Console.ReadKey();
+
+            }
+            else
+            {
+                if (totalcpu <= 21 && totalcpu > totalj)
+                {
+                    Console.WriteLine("Vitória da Máquina");
+                    Console.WriteLine("Encerrando-se a rodada.");
+
+                    Console.ReadKey();
+
+                }
+                else
+                {
+                    if (totalcpu == totalj)
+                    {
+                        Console.WriteLine("Empate técnico");
+                        Console.WriteLine("Encerrando-se a rodada.");
+
+                        Console.ReadKey();
+
+                    }
+                    else
+                    {
+                        if (totalcpu > 21 && totalj <= 21)
+                        {
+                            Console.WriteLine("Vitória do Jogador");
+                            Console.WriteLine("Encerrando-se a rodada.");
+
+                            Console.ReadKey();
+
+                        }
+                        else
+                        {
+                            if (totalj > 21 && totalcpu <= 21)
+                            {
+                                Console.WriteLine("Vitória da Máquina");
+                                Console.WriteLine("Encerrando-se a rodada.");
+
+                                Console.ReadKey();
+
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            cartas = new List<Carta>();
+            totalj = 0;
+            totalcpu = 0;
+            MaoJ(cartas);
+        }
+        static void SacarCarta(List<Carta> cartas)
+        {
+            Random random = new Random();
+            string carta = "";
+            int valor_carta = RandomNumberGenerator.GetInt32(1, 14);
+            int n = RandomNumberGenerator.GetInt32(1, 5);
+            string naipe;
+            naipe = Naipe(n);
+            Cartas(ref carta, ref valor_carta);
+            VerificarCarta(cartas, ref carta, ref valor_carta, ref naipe);
+        }
+
+
+
+
+
+
+
+        static void VerificarCarta(List<Carta> cartas, ref string carta, ref int valor_carta, ref string naipe)
+        {
+            for (int i = 0; i < cartas.Count; i++)
+            {
+                if (carta == cartas[i].carta && naipe == cartas[i].naipe)
+                {
+                    valor_carta = RandomNumberGenerator.GetInt32(1, 14);
+                    string novacarta = "";
+                    naipe = "";
+                    int n = RandomNumberGenerator.GetInt32(1, 5);
+                    int novo_valor_carta = valor_carta;
+                    Cartas(ref novacarta, ref novo_valor_carta);
+                    carta = novacarta;
+                    valor_carta = novo_valor_carta;
+                    naipe = Naipe(n);
+                    i = 0;
+                }
+            }
+            cartas.Add(new Carta
+            {
+                naipe = naipe,
+                valor_carta = valor_carta,
+                carta = carta
+
+            });
+        }
+        class Carta
+        {
+            public string naipe { get; set; }
+            public int valor_carta { get; set; }
+            public string carta { get; set; }
+        }
+    }
+}
+
+
