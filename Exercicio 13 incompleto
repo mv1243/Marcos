@@ -1,0 +1,68 @@
+//    Jogo de dados.Dois jogadores estão confrontando-se entre si, usando dois dados, 
+    //numerados de 1 até 6 (dado RAND(5) + 1). Vence uma rodada quem obtiver o maior
+    //número no lançamento.Entretanto, caso um jogador obtiver um lançamento com dois
+    //dados iguais (por exemplo, 1 e 1, 2 e 2,....) e o outro jogador não, o jogador que tiver
+    //lançado a dupla ganha.Caso os dois jogadores fizerem o lançamento e o resultado for 
+    //de duas duplas para os dois jogadores, ganha o jogador com a dupla maior.A disputa é
+    //em 11 lançamentos.Indique o jogador vencedor ou se houve empate.
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> dado_j1 = new List<int>();
+            List<int> dado_j2 = new List<int>();
+            int lancamento = 0;
+            while (lancamento <= 11)
+            {
+                
+                lancamento++;
+            }
+            Console.ReadLine();
+        }
+        static int LancarDados(List<int> dados)
+        {
+            int soma = 0;
+            for (int i = 0; i < 2; i++)
+            {
+                int dado = RandomNumberGenerator.GetInt32(1, 7);
+                dados.Add(dado);
+                soma = dados[i] + soma;
+            }
+            return soma;
+        }
+        static void RodadaJ1(ref List<int> dado_j1)
+        {
+            bool duplo = false;
+            int soma;
+            soma = LancarDados(dado_j1);
+            duplo = CompararDados(dado_j1);
+
+        }
+        static void RodadaJ2(ref List<int> dado_j2)
+        {
+            bool duplo = false;
+            int soma;
+            soma = LancarDados(dado_j2);
+            duplo = CompararDados(dado_j2);
+        }
+        static bool CompararDados(List<int> dados)
+        {
+            bool duplo = false;
+            for (int i = 0; i < 1; i++)
+            {
+                if (dados[i] == dados[i + 1])
+                {
+                    duplo = true;
+                }
+
+            }
+            return duplo;
+        }
+        static void Resultado(List<int> dado_j1, List<int> dado_j2) 
+        {
+            
+        }
+    }
+    
+}
