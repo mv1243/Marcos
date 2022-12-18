@@ -1,4 +1,12 @@
-//    Jogo de dados.Dois jogadores estão confrontando-se entre si, usando dois dados, 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Security.Cryptography;
+
+namespace ConsoleApp1
+{
+    //Jogo de dados.Dois jogadores estão confrontando-se entre si, usando dois dados, 
     //numerados de 1 até 6 (dado RAND(5) + 1). Vence uma rodada quem obtiver o maior
     //número no lançamento.Entretanto, caso um jogador obtiver um lançamento com dois
     //dados iguais (por exemplo, 1 e 1, 2 e 2,....) e o outro jogador não, o jogador que tiver
@@ -10,59 +18,183 @@
     {
         static void Main(string[] args)
         {
+            Partida();
+            Console.ReadLine();
+            
+        }
+        static void Partida()
+        {
             List<int> dado_j1 = new List<int>();
             List<int> dado_j2 = new List<int>();
+            int resultado = 0;
             int lancamento = 0;
+            Console.WriteLine("Bem-vindo ao jogo de dados, ele se consiste em que dois jogadores irão jogar 2 dados em cada rodada,");
+            Console.WriteLine("o jogador que tiver a maior soma vence. Caso o jogador tire uma dupla (dois dados com o mesmo resultado,");
+            Console.WriteLine("o jogador automaticamente ganha, entretanto se os dois jogadores tirarem a dupla, ganha aquele que tiver");
+            Console.WriteLine("a maior dupla, se os dois jogadores tirarem a mesma dupla ou a mesma soma, é declarado empate na rodada.");
+            Console.WriteLine("Boa sorte, Prima uma tecla para começar.");
+            Console.ReadKey();
+            Console.WriteLine();
+            Console.WriteLine();
             while (lancamento <= 11)
             {
-                
+                Resultado(ref dado_j1, ref dado_j2, ref resultado);
                 lancamento++;
             }
-            Console.ReadLine();
+            ResultadoFinal(ref resultado);
         }
-        static int LancarDados(List<int> dados)
+        
+        
+        static void Resultado(ref List<int> dado_j1, ref List<int> dado_j2, ref int resultado)
         {
-            int soma = 0;
-            for (int i = 0; i < 2; i++)
-            {
-                int dado = RandomNumberGenerator.GetInt32(1, 7);
-                dados.Add(dado);
-                soma = dados[i] + soma;
-            }
-            return soma;
-        }
-        static void RodadaJ1(ref List<int> dado_j1)
-        {
-            bool duplo = false;
-            int soma;
-            soma = LancarDados(dado_j1);
-            duplo = CompararDados(dado_j1);
+            bool duplo_j1 = false;
+            int soma_j1;
+            soma_j1 = Dados.LancarDados(dado_j1);
+            duplo_j1 = Dados.CompararDados(dado_j1);
 
-        }
-        static void RodadaJ2(ref List<int> dado_j2)
-        {
-            bool duplo = false;
-            int soma;
-            soma = LancarDados(dado_j2);
-            duplo = CompararDados(dado_j2);
-        }
-        static bool CompararDados(List<int> dados)
-        {
-            bool duplo = false;
-            for (int i = 0; i < 1; i++)
+            bool duplo_j2 = false;
+            int soma_j2;
+            soma_j2 = Dados.LancarDados(dado_j2);
+            duplo_j2 = Dados.CompararDados(dado_j2);
+
+            Console.WriteLine("Dados do jogador 1:" + dado_j1[0] + " e " + dado_j1[1] + ", Soma:" + soma_j1);
+            Console.WriteLine("Dados do jogador 2:" + dado_j2[0] + " e " + dado_j2[1] + ", Soma:" + soma_j2);
+
+
+
+            if (duplo_j1 == true && duplo_j2 == true)
             {
-                if (dados[i] == dados[i + 1])
+                if (soma_j1 == soma_j2)
                 {
-                    duplo = true;
+                    Console.WriteLine("Resultado: empate");
+                    Console.WriteLine("Prima uma tecla para ir para próxima rodada");
+                    Console.ReadKey();
+                    
                 }
-
+                else
+                {
+                    if (soma_j1 > soma_j2)
+                    {
+                        Console.WriteLine("Resultado: Vitória do J1");
+                        Console.WriteLine("Prima uma tecla para ir para próxima rodada");
+                        Console.ReadKey();
+                        
+                        resultado++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Resultado: Vitória do J2");
+                        Console.WriteLine("Prima uma tecla para ir para próxima rodada");
+                        Console.ReadKey();
+                       
+                        resultado--;
+                    }
+                }
             }
-            return duplo;
+            else
+            {
+                if (duplo_j1 == true && duplo_j2 == false)
+                {
+                    Console.WriteLine("Resultado: Vitória do J1");
+                    Console.WriteLine("Prima uma tecla para ir para próxima rodada");
+                    Console.ReadKey();
+                    
+                    resultado++;
+                }
+                else
+                {
+                    if (duplo_j1 == false && duplo_j2 == true)
+                    {
+                        Console.WriteLine("Resultado: Vitória do J2");
+                        Console.WriteLine("Prima uma tecla para ir para próxima rodada");
+                        Console.ReadKey();
+                        
+                        resultado--;
+                    }
+                    else
+                    {
+                        if (soma_j1 == soma_j2)
+                        {
+                            Console.WriteLine("Resultado: empate");
+                            Console.WriteLine("Prima uma tecla para ir para próxima rodada");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            if (soma_j1 > soma_j2)
+                            {
+                                Console.WriteLine("Resultado: Vitória do J1");
+                                Console.WriteLine("Prima uma tecla para ir para próxima rodada");
+                                Console.ReadKey();
+                                resultado++;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Resultado: Vitória do J2");
+                                Console.WriteLine("Prima uma tecla para ir para próxima rodada");
+                                Console.ReadKey();
+                                resultado--;
+                            }
+                        }
+                    }
+                }
+            }
+             dado_j1 = new List<int>();
+             dado_j2 = new List<int>();
+            Console.WriteLine();
+            Console.WriteLine();
+
         }
-        static void Resultado(List<int> dado_j1, List<int> dado_j2) 
+        static void ResultadoFinal(ref int resultado)
         {
-            
+            if (resultado > 0)
+            {
+                Console.WriteLine("Jogador 1, venceu a partida.");
+                Console.ReadKey();
+            }
+            else
+            {
+                if (resultado < 0)
+                {
+                    Console.WriteLine("Jogador 2, venceu a partida.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("Empate absoluto.");
+                    Console.ReadKey();
+                }
+            }
+        }
+        class Dados
+        {
+           public static int LancarDados(List<int> dados)
+            {
+                int soma = 0;
+                for (int i = 0; i < 2; i++)
+                {
+                    int dado = RandomNumberGenerator.GetInt32(1, 7);
+                    dados.Add(dado);
+                    soma = dados[i] + soma;
+                }
+                return soma;
+            }
+            public static bool CompararDados(List<int> dados)
+            {
+                bool duplo = false;
+                for (int i = 0; i < 1; i++)
+                {
+                    if (dados[i] == dados[i + 1])
+                    {
+                        duplo = true;
+                    }
+
+                }
+                return duplo;
+            }
         }
     }
     
 }
+
+
