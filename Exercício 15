@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Security.Cryptography;
+
+namespace ConsoleApp1
+{
+//  Um palíndromo é uma cadeia que pode ser lida de frente para trás e de trás para
+//  frente.Ex: ‘SOMOS’ ‘1234321’. Implemente a função palindromo(palavra). O
+//  parâmetro palavra é uma string. A função deverá retornar True se for um palíndromo e
+//  False caso contrário.
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Programa();
+
+        }
+
+        static void Programa()
+        {
+            bool success;
+            string palavra = "abccda";
+            success = Palindromo(palavra);
+            if (success == true)
+            {
+                Console.WriteLine("Está palavra é um palíndromo.");        
+            }
+            else
+            {
+                Console.WriteLine("Está palavra não é um palíndromo.");
+            }
+            Console.ReadKey();
+        }
+        static bool Palindromo(string palavra)
+        {
+            bool success = true;
+            int j = palavra.Length - 1;
+            for (int i = 0; i < palavra.Length; i++)
+            {           
+                if (palavra[i] != palavra[j])
+                {
+                    success = false;
+                }
+                j--;
+            }
+            return success;
+        }
+
+
+
+    }
+    
+}
