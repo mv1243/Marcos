@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Security.Cryptography;
+using System.IO;
+
+namespace ConsoleApp1
+{
+//    arquivo saida.txt, com a letra e o número de ocorrências. O arquivo saída terá o
+//    formato, por exemplo:
+//    A 13
+//    B 28
+//    Z 1
+
+
+    class Program
+    { 
+        static void Main(string[] args)
+        {
+            string[] lines = File.ReadAllLines(@"D:\Nova pasta\Arquivo.txt", Encoding.UTF8);
+           
+            Algorithm(lines);
+        }
+        static void Algorithm(string[] lines)
+        {
+            
+            string letter;
+            List<char> all_letters = new List<char>(); 
+            
+            
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i] = lines[i].ToString().ToUpper();
+                letter = lines[i];
+                for (int j = 0; j < letter.Length; j++)
+                {
+                    all_letters.Add(letter[j]); 
+                    
+                }
+                
+            }
+            Occurrence(all_letters);
+            
+            Console.ReadLine();
+        }
+       
+        static void Occurrence(List<char> all_letters)
+        {
+            for (int i = 0; i < all_letters.Count; i++)
+            {
+                
+                for (int j = i + 1; j < all_letters.Count; j++)
+                {
+                    if (all_letters[i] > all_letters[j])
+                    {
+                        char temp = all_letters[i];
+                        all_letters[i] = all_letters[j];
+                        all_letters[j] = temp;
+                    }
+                }
+            }
+            int index = 1;
+            for (int i = 0; i < all_letters.Count - 1; i++)
+            {
+                
+                if (all_letters[i] == all_letters[i+1])
+                {
+                    index++;
+                }
+                else
+                {
+                    Console.WriteLine(all_letters[i] + " " + index);
+                    index = 1;
+                }
+            }
+            Console.WriteLine(all_letters[all_letters.Count - 1] + " " + index);
+        }
+    }
+    
+}
