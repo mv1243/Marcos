@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Security.Cryptography;
+using System.IO;
+
+namespace ConsoleApp1
+{
+//    arquivo saida.txt, com a letra e o número de ocorrências. O arquivo saída terá o
+//    formato, por exemplo:
+//    A 13
+//    B 28
+//    Z 1
+
+
+    class Program
+    { 
+        static void Main(string[] args)
+        {
+            Menu();
+            Console.ReadLine();
+        }
+        static void Menu()
+        {
+            List<string> palindromo = new List<string>();
+            bool success = true;
+            
+
+            Console.WriteLine("Digite um conjunto de palavras (uma palavra por vez), para identificar o maior Palindromo.");
+            Console.WriteLine("Se o usuário Digitar o número 0, irá parar.");
+            
+            while (success)
+            {
+               string word = Console.ReadLine().ToUpper();
+                bool pass = true;
+                if (word == "0")
+                {
+                    success = false;
+                }
+                else
+                {
+                    
+                    for (int i = 0; i < word.Length; i++)
+                    {
+                        if (word[i] == ' ')
+                        {
+                            pass = false;
+                        }
+                    }
+                }
+                if (pass == true)
+                {
+                    Palindromo(word, ref palindromo);
+                }
+                else
+                {
+                    Console.WriteLine("O usuário digitou duas o mais palavra de uma vez, por favor, digite apenas uma palavra");                           
+                }
+            }
+
+            Algorithm(palindromo);
+
+        }
+        static void Algorithm(List<string> palindromo)
+        {
+            
+            if (palindromo.Count == 0)
+            {
+                Console.WriteLine("Não houve Palindromo digitados");
+            }
+            else
+            {
+                string maior_palindromo = palindromo[0];
+                for (int i = 0; i < palindromo.Count; i++)
+                {
+                    if (maior_palindromo.Length < palindromo[i].Length)
+                    {
+                        maior_palindromo = palindromo[i];
+                    }
+                }
+                Console.WriteLine("O maior palindromo digitado é:" + maior_palindromo);
+                
+            }
+            
+            
+           
+        }
+        static void Palindromo(string word, ref List<string> palindromo)
+        {
+            bool success = true;
+            int j = word.Length - 1;
+            for (int i = 0; i < word.Length; i++)
+            {
+                
+                if (word[i] != word[j])
+                {
+                    success = false;
+                }
+                j--;
+            }
+            if (success == true)
+            {
+                palindromo.Add(word);
+            }
+        }
+        
+       
+        
+    }
+    
+}
+
+
