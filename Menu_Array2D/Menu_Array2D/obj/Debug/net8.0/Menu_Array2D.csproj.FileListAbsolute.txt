@@ -1,0 +1,14 @@
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\bin\Debug\net8.0\Menu_Array2D.exe
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\bin\Debug\net8.0\Menu_Array2D.deps.json
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\bin\Debug\net8.0\Menu_Array2D.runtimeconfig.json
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\bin\Debug\net8.0\Menu_Array2D.dll
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\bin\Debug\net8.0\Menu_Array2D.pdb
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\Menu_Array2D.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\Menu_Array2D.AssemblyInfoInputs.cache
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\Menu_Array2D.AssemblyInfo.cs
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\Menu_Array2D.csproj.CoreCompileInputs.cache
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\Menu_Array2D.dll
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\refint\Menu_Array2D.dll
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\Menu_Array2D.pdb
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\Menu_Array2D.genruntimeconfig.cache
+C:\Users\mchagas\source\repos\Menu_Array2D\Menu_Array2D\obj\Debug\net8.0\ref\Menu_Array2D.dll

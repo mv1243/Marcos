@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu_Array2D", "Menu_Array2D\Menu_Array2D.csproj", "{09526B6C-1529-4400-88AD-53D65D594564}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09526B6C-1529-4400-88AD-53D65D594564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09526B6C-1529-4400-88AD-53D65D594564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09526B6C-1529-4400-88AD-53D65D594564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09526B6C-1529-4400-88AD-53D65D594564}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B440D3F5-88B6-4E3C-AD21-BAF37BD7FB92}
+	EndGlobalSection
+EndGlobal
