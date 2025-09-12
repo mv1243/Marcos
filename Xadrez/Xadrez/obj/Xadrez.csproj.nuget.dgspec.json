@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj": {}
+    "C:\\Users\\mchagas\\Desktop\\Xadrez\\Xadrez\\Xadrez.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj": {
+    "C:\\Users\\mchagas\\Desktop\\Xadrez\\Xadrez\\Xadrez.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj",
+        "projectUniqueName": "C:\\Users\\mchagas\\Desktop\\Xadrez\\Xadrez\\Xadrez.csproj",
         "projectName": "Xadrez",
-        "projectPath": "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj",
-        "packagesPath": "C:\\Users\\Alessandro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\obj\\",
+        "projectPath": "C:\\Users\\mchagas\\Desktop\\Xadrez\\Xadrez\\Xadrez.csproj",
+        "packagesPath": "C:\\Users\\mchagas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mchagas\\Desktop\\Xadrez\\Xadrez\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "F:\\Visual Studo\\Components\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Alessandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\mchagas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,22 +40,11 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Spectre.Console": {
-              "target": "Package",
-              "version": "[0.51.1, )"
-            },
-            "System.Text.Encoding.Extensions": {
-              "target": "Package",
-              "version": "[4.3.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -75,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

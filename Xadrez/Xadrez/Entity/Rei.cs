@@ -19,10 +19,11 @@ namespace Xadrez.Entity
         public Rei(int cor)
         {
             Nome = "Rei";
-            if (cor == 1) {
+            if (cor == 1)
+            {
                 Cor = "Branco"; Icone = "♚";
-            } 
-            if (cor == 2) 
+            }
+            if (cor == 2)
             {
                 Cor = "Preto"; Icone = "♔";
             }
@@ -33,57 +34,206 @@ namespace Xadrez.Entity
         {
             //OBJETIVO RESCREVER A TABELA DENTRO DA FUNCAO
 
+            ////Não Marcar a si mesmo
+            if (y1 == y && x1 == x) return false;
 
-                
-            bool peça_inimiga;
-            bool caminho_interrompido = false ;
-            if (y1 == y && x1 == x)
+            // Regras do Movimento
+            if (DiagonalEsquerdaCima(y1, x1, y, x, pecas) || DiagonalDireitaCima(y1, x1, y, x, pecas)) return true;
+
+            return false;
+
+
+            static bool DiagonalEsquerdaCima(int y1, int x1, int y, int x, IPeca[,] pecas)
             {
+
+                //TROCAR ORDEM DAS REGRAS
+                int z = 1;
+                //Aqui ele começa a mapear o tabuleiro começando pela peça que está sendo movida
+                for (int i = (y1 - 1); i >= 0; i--)
+                {
+                    for (int j = (x1 - 1); j >= 0; j--)
+                    {
+                        if (pecas[i, j].Tipo == "Campo")
+                        {
+                            //após ele encontrar o campo selecionado, ele aplicará a regra da movimentação
+                            if (pecas[i, j] == pecas[y, x])
+                            {
+                                //Diagonal Cima/Esquerda
+                                if ((y1 - y) == z && (x1 - x) == z)
+                                {
+
+                                    return true;
+                                }
+                            }
+
+                        }
+                        // caso encontre uma peça, ele verificará se é do time adversário e aplicará a regra da movimentação
+                        if (pecas[i, j].Tipo == "Peça")
+                        {
+                            if (pecas[y1, x1].Cor != pecas[i, j].Cor)
+                            {
+                                if (pecas[i, j] == pecas[y, x])
+                                {
+                                    //Diagonal Cima/Esquerda
+                                    if ((y1 - y) == z && (x1 - x) == z)
+                                    {
+
+                                        return true;
+                                    }
+                                }
+                            }
+                            return false;
+                        }
+                    }
+                    z++;
+                }
                 return false;
             }
 
-            if (tipo != "Peça") caminho_interrompido = true;
-
-            int i = 1;
-            int j = -1;
-            for (i = 1; i <= 8; i++, j--)
+            static bool DiagonalDireitaCima(int y1, int x1, int y, int x, IPeca[,] pecas)
             {
-
-
-                if (caminho_interrompido)
+                int z = 1;
+                int w = -1;
+                //Aqui ele começa a mapear o tabuleiro começando pela peça que está sendo movida
+                for (int i = (y1 - 1); i >= 0; i--)
                 {
-
-                    //Diagonal Cima/Esquerda
-                    if ((y1 - y) == i && (x1 - x) == i)
+                    for (int j = (x1 - 1); j <= 7; j++)
                     {
-                        return true;
-                    }
+                        if (pecas[i, j].Tipo == "Campo")
+                        {
+                            //após ele encontrar o campo selecionado, ele aplicará a regra da movimentação
+                            if (pecas[i, j] == pecas[y, x])
+                            {
 
-                    //Diagonal Baixo/Direita
-                    if ((y1 - y) == j && (x1 - x) == j)
-                    {
-                        return true;
-                    }
+                                //Diagonal Cima/Direita
+                                if ((y1 - y) == z && (x1 - x) == w)
+                                {
+                                    return true;
+                                }
 
-                    //Diagonal Cima/Direita
-                    if ((y1 - y) == i && (x1 - x) == j)
-                    {
-                        return true;
-                    }
 
-                    //Diagonal Baixo/Esquerda
-                    if ((y1 - y) == j && (x1 - x) == i)
-                    {
-                        return true;
+                            }
+
+                        }
+                        // caso encontre uma peça, ele verificará se é do time adversário e aplicará a regra da movimentação
+                        if (pecas[i, j].Tipo == "Peça")
+                        {
+                            if (pecas[y1, x1].Cor != pecas[i, j].Cor)
+                            {
+                                if (pecas[i, j] == pecas[y, x])
+                                {
+
+                                    //Diagonal Cima/Direita
+                                    if ((y1 - y) == z && (x1 - x) == w)
+                                    {
+                                        return true;
+                                    }
+
+                                }
+                            }
+                            return false;
+                        }
                     }
+                    z++;
+                    w--;
                 }
-
-              
+                return false;
             }
-            
+
+            static bool DiagonalEsquerdaBaixo(int y1, int x1, int y, int x, IPeca[,] pecas)
+            {
+                int w = -1;
+                int z = 1;
+                //Aqui ele começa a mapear o tabuleiro começando pela peça que está sendo movida
+                for (int i = (y1 - 1); i <= 7; i++)
+                {
+                    for (int j = (x1 - 1); j >= 0; j--)
+                    {
+                        if (pecas[i, j].Tipo == "Campo")
+                        {
+                            //após ele encontrar o campo selecionado, ele aplicará a regra da movimentação
+                            if (pecas[i, j] == pecas[y, x])
+                            {
+
+                                //Diagonal Baixo/Esquerda
+                                if ((y1 - y) == w && (x1 - x) == z)
+                                {
+                                    return true;
+                                }
 
 
-            
+                            }
+
+                        }
+                        // caso encontre uma peça, ele verificará se é do time adversário e aplicará a regra da movimentação
+                        if (pecas[i, j].Tipo == "Peça")
+                        {
+                            if (pecas[y1, x1].Cor != pecas[i, j].Cor)
+                            {
+                                if (pecas[i, j] == pecas[y, x])
+                                {
+                                    //Diagonal Baixo/Esquerda
+                                    if ((y1 - y) == w && (x1 - x) == z)
+                                    {
+                                        return true;
+                                    }
+
+
+                                }
+                            }
+                            return false;
+                        }
+                    }
+                    z++;
+                    w--;
+                }
+                return false;
+            }
+
+
+
+
+
+            //if (tipo != "Peça") caminho_interrompido = true;
+
+            //int i = 1;
+            //int j = -1;
+            //for (i = 1; i <= 8; i++, j--)
+            //{
+
+
+            //    if (caminho_interrompido)
+            //    {
+
+            //        //Diagonal Cima/Esquerda
+            //        if ((y1 - y) == i && (x1 - x) == i)
+            //        {
+            //            return true;
+            //        }
+
+            //        //Diagonal Baixo/Direita
+            //        if ((y1 - y) == j && (x1 - x) == j)
+            //        {
+            //            return true;
+            //        }
+
+            //        //Diagonal Cima/Direita
+            //        if ((y1 - y) == i && (x1 - x) == j)
+            //        {
+            //            return true;
+            //        }
+
+            //        //Diagonal Baixo/Esquerda
+            //        if ((y1 - y) == j && (x1 - x) == i)
+            //        {
+            //            return true;
+            //        }
+            //    }
+            //}
+
+
+
+
 
 
             //Movimento do Rei
@@ -99,7 +249,7 @@ namespace Xadrez.Entity
             //    return true;
             //}
 
-            return false;
+
         }
         public void MoverPeca()
         {

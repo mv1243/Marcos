@@ -22,13 +22,13 @@ public class Tabuleiro : ITabuleiro
 
     IPeca[,] Pecas =
     {
+     {new Campo(),  new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
      {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
+     {new Campo(), new Campo(), new Rei(2), new Campo(), new Campo(), new Campo(), new Rei(2),  new Campo()},
      {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Rei(2),new Campo(), new Campo(), new Campo(), new Rei(2), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Rei(1), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
+     {new Campo(), new Campo(), new Campo(),new Campo(), new Rei(1),  new Campo(), new Campo(), new Campo()},
+     {new Campo(), new Campo(), new Rei(2),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
+     {new Campo(), new Campo(), new Rei(2), new Campo(), new Campo(), new Campo(), new Rei(2),  new Campo()},
      {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
     };
 
@@ -71,9 +71,19 @@ public class Tabuleiro : ITabuleiro
                     if (Pecas[y, x].Tipo == "Peça")
                     {
 
-                        Console.BackgroundColor = ConsoleColor.DarkYellow;
-                        Console.Write($"[{Pecas[y, x].Icone}]");
-                        Console.BackgroundColor = ConsoleColor.Black;
+                        if (Pecas[x, y].Cor != Pecas[y1, x1].Cor)
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkRed;
+                            Console.Write($"[{Pecas[y, x].Icone}]");
+                            Console.BackgroundColor = ConsoleColor.Black;
+                        }
+                        else
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            Console.Write($"[{Pecas[y, x].Icone}]");
+                            Console.BackgroundColor = ConsoleColor.Black;
+                        }
+
                     }
 
                 }

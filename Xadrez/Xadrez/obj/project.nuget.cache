@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2eq98/2loeU=",
+  "dgSpecHash": "dORRLWx/QLg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Alessandro\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\Alessandro\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "C:\\Users\\Alessandro\\.nuget\\packages\\spectre.console\\0.51.1\\spectre.console.0.51.1.nupkg.sha512",
-    "C:\\Users\\Alessandro\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
-    "C:\\Users\\Alessandro\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
-    "C:\\Users\\Alessandro\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\mchagas\\Desktop\\Xadrez\\Xadrez\\Xadrez.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

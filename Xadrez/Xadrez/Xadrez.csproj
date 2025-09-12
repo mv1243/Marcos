@@ -7,9 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Spectre.Console" Version="0.51.1" />
-    <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
-  </ItemGroup>
-
 </Project>

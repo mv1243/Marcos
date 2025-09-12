@@ -1,5 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Spectre.Console;
 using System.Text;
 using System.Text.Encodings.Web;
 using Xadrez;
