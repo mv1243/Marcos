@@ -8,7 +8,7 @@ namespace Xadrez.Interface
 {
     internal interface ITabuleiro
     {
-       public string Tipo { get; }
+        public string Tipo { get; }
 
 
     }

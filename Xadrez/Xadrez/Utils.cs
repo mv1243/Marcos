@@ -8,7 +8,7 @@ namespace Xadrez
 {
     internal class Utils
     {
-       public static string Square(string piece)
+        public static string Square(string piece)
         {
             double n = 1.5;
             return piece.PadLeft(3).PadRight(1);

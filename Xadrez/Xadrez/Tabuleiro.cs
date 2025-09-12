@@ -3,6 +3,8 @@ using System.Runtime.CompilerServices;
 using Xadrez.Entity;
 using Xadrez.Interface;
 
+
+
 namespace Xadrez;
 public class Tabuleiro : ITabuleiro
 {
@@ -22,46 +24,116 @@ public class Tabuleiro : ITabuleiro
     {
      {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
      {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
+     {new Campo(), new Campo(), new Rei(2),new Campo(), new Campo(), new Campo(), new Rei(2), new Campo()},
+     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
+     {new Campo(), new Campo(), new Campo(),new Campo(), new Rei(1), new Campo(), new Campo(), new Campo()},
      {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
      {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
      {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Rei(1), new Campo(), new Campo(), new Campo(), new Campo()},
     };
 
 
     string ITabuleiro.Tipo => "Campo";
 
-    private void Verificar_Campo(int y, int x, int pos_y, int pos_x)
+    private void Montar_Campo(int y, int x, int pos_y, int pos_x, bool pre_movimento = false, int y1 = 0, int x1 = 0)
     {
-        if (pos_y == y && pos_x == x)
+        if (pre_movimento)
         {
-            if (Pecas[y,x].Tipo == "Campo")
+
+            if (pos_y == y && pos_x == x)
             {
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.Write($"[{Definir_Campo(Campo[y, x])}]");
-                Console.BackgroundColor = ConsoleColor.Black;
+                if (Pecas[y, x].Tipo == "Campo")
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"[{Definir_Campo(Campo[y, x])}]");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                if (Pecas[y, x].Tipo == "Peça")
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"[{Pecas[y, x].Icone}]");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
             }
-            if (Pecas[y, x].Tipo == "Peça")
+            else
             {
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.Write($"[{Pecas[y,x].Icone}]");
-                Console.BackgroundColor = ConsoleColor.Black;
-            }         
+                bool MarcaVermelha = false;
+                bool parar = false;
+                if (Pecas[y1, x1].PreMovimento(y1, x1, y, x, Pecas[y, x].Tipo, Pecas[y, x].Cor, Pecas))
+                {
+
+                    if (Pecas[y, x].Tipo == "Campo")
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.Write($"[{Definir_Campo(Campo[y, x])}]");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    if (Pecas[y, x].Tipo == "Peça")
+                    {
+
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.Write($"[{Pecas[y, x].Icone}]");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+
+                }
+                else
+                {
+                    if (Pecas[y, x].Tipo == "Campo")
+                    {
+                        Console.Write($"[{Definir_Campo(Campo[y, x])}]");
+                    }
+                    if (Pecas[y, x].Tipo == "Peça")
+                    {
+                        if (Pecas[y, x] == Pecas[y1, x1])
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkBlue;
+                            Console.Write($"[{Pecas[y, x].Icone}]");
+                            Console.BackgroundColor = ConsoleColor.Black;
+                        }
+                        else
+                        {
+                            Console.Write($"[{Pecas[y, x].Icone}]");
+                        }
+
+                    }
+                }
+
+
+            }
         }
         else
         {
-            if (Pecas[y, x].Tipo == "Campo")
+            if (pos_y == y && pos_x == x)
             {
-                Console.Write($"[{Definir_Campo(Campo[y, x])}]");
+                if (Pecas[y, x].Tipo == "Campo")
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"[{Definir_Campo(Campo[y, x])}]");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                if (Pecas[y, x].Tipo == "Peça")
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"[{Pecas[y, x].Icone}]");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
             }
-            if (Pecas[y, x].Tipo == "Peça")
-            {                
-                Console.Write($"[{Pecas[y, x].Icone}]");             
+            else
+            {
+                if (Pecas[y, x].Tipo == "Campo")
+                {
+                    Console.Write($"[{Definir_Campo(Campo[y, x])}]");
+                }
+                if (Pecas[y, x].Tipo == "Peça")
+                {
+                    Console.Write($"[{Pecas[y, x].Icone}]");
+                }
+
             }
 
-        }                                      
+        }
+
     }
     private string Definir_Campo(int valor)
     {
@@ -83,12 +155,12 @@ public class Tabuleiro : ITabuleiro
 
         int y1 = 0;
         int x1 = 0;
-       
+
         int y2 = 0;
         int x2 = 0;
 
-
         bool primeiro_movimento = true;
+        bool pre_movimento = false;
         bool segundo_movimento = false;
 
         while (true)
@@ -96,7 +168,22 @@ public class Tabuleiro : ITabuleiro
             Console.Clear();
 
             if (primeiro_movimento) Console.WriteLine("Selecionar Campo");
-            if (segundo_movimento) Console.WriteLine("Mover para...");
+
+            if (segundo_movimento)
+            {
+                if (Pecas[y1, x1].Tipo == "Peça")
+                {
+                    Console.WriteLine($"Peça:{Pecas[y1, x1].Nome} {Pecas[y1, x1].Cor} Mover para...");
+                    pre_movimento = true;
+                }
+                if (Pecas[y1, x1].Tipo == "Campo")
+                {
+                    Console.WriteLine("Nenhuma Peça foi selecionada");
+                    segundo_movimento = false;
+                }
+
+            }
+
 
             DescricaoMovimento(pos_x, pos_y);
             Console.WriteLine(CasaCor(pos_y, pos_x));
@@ -112,9 +199,16 @@ public class Tabuleiro : ITabuleiro
 
                 for (int x = 0; x < 8; x++)
                 {
+                    if (segundo_movimento && pre_movimento)
+                    {
+                        Montar_Campo(y, x, pos_y, pos_x, pre_movimento, y1, x1);
+                    }
+                    else
+                    {
+                        Montar_Campo(y, x, pos_y, pos_x);
+                    }
 
-                   Verificar_Campo(y, x, pos_y, pos_x);
-                    
+
                 }
                 n--;
                 Console.Write("│");
@@ -124,13 +218,10 @@ public class Tabuleiro : ITabuleiro
 
             Console.WriteLine("  └────────────────────────┘");
             Console.WriteLine("    A  B  C  D  E  F  G  H");
-            key  = Console.ReadKey();
+            key = Console.ReadKey();
             MenuMovimento(ref pos_x, ref pos_y, key, ref primeiro_movimento, ref segundo_movimento, ref y1, ref x1, ref y2, ref x2);
 
-            if (segundo_movimento)
-            {
-                Verificar_Campo(y1, x1, pos_y, pos_x);
-            }
+
 
             Console.WriteLine();
 
@@ -157,8 +248,8 @@ public class Tabuleiro : ITabuleiro
                             y1 = pos_y;
                             x1 = pos_x;
                         }
-                        else 
-                        {                       
+                        else
+                        {
                             primeiro_movimento = true;
                             segundo_movimento = false;
                             y2 = pos_y;

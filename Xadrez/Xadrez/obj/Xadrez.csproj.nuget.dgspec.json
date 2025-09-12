@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alessandro\\source\\repos\\mv1243\\Marcos\\Xadrez\\Xadrez\\Xadrez.csproj": {}
+    "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alessandro\\source\\repos\\mv1243\\Marcos\\Xadrez\\Xadrez\\Xadrez.csproj": {
+    "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alessandro\\source\\repos\\mv1243\\Marcos\\Xadrez\\Xadrez\\Xadrez.csproj",
+        "projectUniqueName": "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj",
         "projectName": "Xadrez",
-        "projectPath": "C:\\Users\\Alessandro\\source\\repos\\mv1243\\Marcos\\Xadrez\\Xadrez\\Xadrez.csproj",
+        "projectPath": "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\Xadrez.csproj",
         "packagesPath": "C:\\Users\\Alessandro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alessandro\\source\\repos\\mv1243\\Marcos\\Xadrez\\Xadrez\\obj\\",
+        "outputPath": "C:\\Users\\Alessandro\\source\\repos\\Xadrez\\Xadrez\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "F:\\Visual Studo\\Components\\NuGetPackages"
@@ -49,6 +49,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.51.1, )"
+            },
+            "System.Text.Encoding.Extensions": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
