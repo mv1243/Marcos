@@ -7,29 +7,8 @@ using Xadrez.Interface;
 
 namespace Xadrez.Entity
 {
-    internal class Campo : IPeca
+    internal class Campo 
     {
-        public string Cor { get; set; }
-        public string Tipo { get; set; }
-
-        public string Nome { get; set; }
-        public string Icone { get; set; }
-
-        public Campo()
-        {
-            Nome = "Campo";
-            Cor = null;
-            Tipo = "Campo";
-        }
-
-        public void MoverPeca()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool PreMovimento(int y1, int x1, int y2, int x2, string tipo = null, string cor = null, IPeca[,] pecas = null)
-        {
-            throw new NotImplementedException();
-        }
+     int 
     }
 }

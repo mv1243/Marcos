@@ -13,6 +13,8 @@ namespace Xadrez.Interface
         public string Nome { get; set; }
         public string Tipo { get; set; }
 
+        public int[] Posicao { get; set; }
+
         public string Icone { get; set; }
         public abstract void MoverPeca();
 

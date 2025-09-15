@@ -19,7 +19,11 @@ public class Tabuleiro : ITabuleiro
       { 1, 0, 1, 0, 1, 0, 1, 0 },
       { 0, 1, 0, 1, 0, 1, 0, 1 },
     };
-
+    // transformar em lista ? :'( a ausencia de peça = campo, lista mais facil de manipular e menos espaço, montar o campo e depois colocar
+    // as peças de acordo com a posição descrita na peça
+    //List<IPeca> list = new List<IPeca>();
+    //var a = list.FirstOrDefault(z => z.Posicao[0] == y && z.Posicao[1] == x); ## exemplo de busca por uma peça em uma posição especifica
+    //a.PreMovimento
     IPeca[,] Pecas =
     {
      {new Campo(),  new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
@@ -37,7 +41,10 @@ public class Tabuleiro : ITabuleiro
 
     private void Montar_Campo(int y, int x, int pos_y, int pos_x, bool pre_movimento = false, int y1 = 0, int x1 = 0)
     {
-        if (pre_movimento)
+   
+        
+
+        if (pre_movimento )
         {
 
             if (pos_y == y && pos_x == x)
@@ -270,6 +277,8 @@ public class Tabuleiro : ITabuleiro
 
             }
 
+
+            //Transformar pos_y e pos_x em jogada de xadrez, EX: EQUATRINO O FAVORITO DE BOBBY FICHER (E4)
             static void DescricaoMovimento(int pos_x, int pos_y)
             {
                 string letra = "?";

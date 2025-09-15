@@ -13,12 +13,18 @@ namespace Xadrez.Entity
 
         public string Nome { get; set; }
         public string Tipo { get; set; }
-
+        public int[] Posicao { get; set; }
         public string Icone { get; set; }
 
+        bool alguem_pode me comer = false;
+
+       // public Rei(int cor, int pos_y, int pos_x)
+       // Criar um for e retornar uma array de posiçoes[pos_y, pos_x]
+       //
         public Rei(int cor)
         {
             Nome = "Rei";
+           // Posicao = [pos_y, pos_x];
             if (cor == 1)
             {
                 Cor = "Branco"; Icone = "♚";
@@ -65,7 +71,6 @@ namespace Xadrez.Entity
                                     return true;
                                 }
                             }
-
                         }
                         // caso encontre uma peça, ele verificará se é do time adversário e aplicará a regra da movimentação
                         if (pecas[i, j].Tipo == "Peça")
