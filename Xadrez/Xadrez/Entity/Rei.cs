@@ -7,32 +7,28 @@ using Xadrez.Interface;
 
 namespace Xadrez.Entity
 {
-    public class Rei : IPeca
+    internal class Rei : IPeca
     {
+        public string Nome { get; set; }
         public string Cor { get; set; }
+        public int Posicao_X { get; set; }
+        public int Posicao_Y { get; set; }
+        public string Icone { get; set; }
 
-        public string Tipo { get; set; }
-
-        public Rei(int cor)
+        public Rei(string Cor, int Posicao_Y, int Posicao_X)
         {
-            if (cor == 1) Cor = "Branco";
-            if (cor == 2) Cor = "Preto";
-            Tipo = "Peça";
-        }
+            Nome = "Rei";
+            this.Cor = Cor;
+            this.Posicao_X = Posicao_X;
+            this.Posicao_Y = Posicao_Y;
 
-        public void MoverPeca(IPeca rei)
-        {
-            static bool ValidarMovimento(int y1, int x1, int y2, int x2)
+            if (Cor == "Branco")
             {
-                int[] localatual = { y1, x1 };
-
-                int[] localfuturo = { y2, x2 };
-
-                if (y1 - y2 <= 1 && y1 - y2 >= -1 && x1 <= 1 && x1 >= -1)
-                {
-                    return true;
-                }
-                return false;
+                Icone = "♚";
+            }
+            else
+            {
+                Icone = "♔";
             }
         }
 

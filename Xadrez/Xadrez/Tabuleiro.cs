@@ -1,190 +1,131 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xadrez.Entity;
 using Xadrez.Interface;
 
-namespace Xadrez;
-public class Tabuleiro : ITabuleiro
+namespace Xadrez
 {
-    int[,] Campo =
-     {
-      { 1, 0, 1, 0, 1, 0, 1, 0 },
-      { 0, 1, 0, 1, 0, 1, 0, 1 },
-      { 1, 0, 1, 0, 1, 0, 1, 0 },
-      { 0, 1, 0, 1, 0, 1, 0, 1 },
-      { 1, 0, 1, 0, 1, 0, 1, 0 },
-      { 0, 1, 0, 1, 0, 1, 0, 1 },
-      { 1, 0, 1, 0, 1, 0, 1, 0 },
-      { 0, 1, 0, 1, 0, 1, 0, 1 },
-    };
-
-    IPeca[,] pecas =
+    internal class Tabuleiro
     {
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Campo(), new Campo(), new Campo(), new Campo(), new Campo()},
-     {new Campo(), new Campo(), new Campo(),new Rei(1), new Campo(), new Campo(), new Campo(), new Campo()},
-    };
-
-
-    string ITabuleiro.Tipo => "Campo";
-
-    private void Verificar_Campo(int y1, int x1)
-    {
-
-    }
-    private string Definir_Campo(int valor)
-    {
-        if (valor == 1) return "■";
-        if (valor == 0) return "□";
-        return "";
-    }
-    private string CasaCor(int y, int x)
-    {
-        string campo = Definir_Campo(Campo[y, x]);
-        if (campo == "■") return "Casa Clara";
-        if (campo == "□") return "Casa Escura";
-        return null;
-    }
-    public void Implimentar_Tabuleiro()
-    {
-        int pos_y = 0;
-        int pos_x = 0;
-
-        int y1 = 0;
-        int x1 = 0;
-       
-        int y2 = 0;
-        int x2 = 0;
-
-
-        bool primeiro_movimento = true;
-        bool segundo_movimento = false;
-
-        while (true)
+        int[,] Campo =
         {
-            Console.Clear();
+            { 1, 0, 1, 0, 1, 0, 1, 0},
+            { 0, 1, 0, 1, 0, 1, 0, 1},
+            { 1, 0, 1, 0, 1, 0, 1, 0},
+            { 0, 1, 0, 1, 0, 1, 0, 1},
+            { 1, 0, 1, 0, 1, 0, 1, 0},
+            { 0, 1, 0, 1, 0, 1, 0, 1},
+            { 1, 0, 1, 0, 1, 0, 1, 0},
+            { 0, 1, 0, 1, 0, 1, 0, 1}
+        };
 
-            if (primeiro_movimento) Console.WriteLine("Selecionar Campo");
-            if (segundo_movimento) Console.WriteLine("Mover para...");
+        List<Interface.IPeca> Pecas = [new Rei("Branco", 7, 4)];
 
-            DescricaoMovimento(pos_x, pos_y);
-            Console.WriteLine(CasaCor(pos_y, pos_x));
-            ConsoleKeyInfo key = default;
-
-            Console.WriteLine("  ┌────────────────────────┐");
-            int n = 8;
-            for (int y = 0; y < 8; y++)
+        public void MontarTabuleiro()
+        {
+            // Posição Y e X do cursor
+            int[] posicao = [0, 0];
+            bool peca_selecionada = false;
+           
+            while (true)
             {
+                Console.Clear();
 
-                Console.Write(n + " │");
+                if (peca_selecionada) PecaSelecionada(posicao);
 
 
-                for (int x = 0; x < 8; x++)
+                Console.WriteLine("  ┌────────────────────────┐");
+                int n = 8;
+                for (int y = 0; y < 8; y++)
                 {
-
-                    if (pos_y == y && pos_x == x)
+                    Console.Write(n + " │");
+                    for (int x = 0; x < 8; x++)
                     {
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.Write($"[{Definir_Campo(Campo[y, x])}]");
-
-
-                        Console.BackgroundColor = ConsoleColor.Black;
+                        EsreverCampo(y, x, posicao);
                     }
-                    else
-                    {
-                        Console.Write($"[{Definir_Campo(Campo[y, x])}]");
-                    }
-
-                    
+                    n--;
+                    Console.Write("│");
+                    Console.WriteLine();
                 }
-                n--;
-                Console.Write("│");
-                Console.WriteLine();
 
+                Console.WriteLine("  └────────────────────────┘");
+                Console.WriteLine("    A  B  C  D  E  F  G  H");
+
+                posicao = MenuMovimento(posicao, ref peca_selecionada);
             }
 
-            Console.WriteLine("  └────────────────────────┘");
-            Console.WriteLine("    A  B  C  D  E  F  G  H");
-            key  = Console.ReadKey();
-            MenuMovimento(ref pos_x, ref pos_y, key, ref primeiro_movimento, ref segundo_movimento, ref y1, ref x1, ref y2, ref x2);
+        }
 
-            if (segundo_movimento)
+        private int[] MenuMovimento(int[] posicao, ref bool peca_selecionada)
+        {
+            
+            ConsoleKeyInfo key = Console.ReadKey();
+            switch (key.Key)
             {
-                Verificar_Campo(y1, x1);
+                case ConsoleKey.DownArrow: if (posicao[0] < 7) posicao[0]++; break;
+
+                case ConsoleKey.UpArrow: if (posicao[0] > 0) posicao[0]--; break;
+
+                case ConsoleKey.RightArrow: if (posicao[1] < 7) posicao[1]++; break;
+
+                case ConsoleKey.LeftArrow: if (posicao[1] > 0) posicao[1]--; break;
+
+                case ConsoleKey.Enter:
+                    peca_selecionada = true;
+                    break;
             }
+            return posicao;
 
-            Console.WriteLine();
+        }
 
+        private void EsreverCampo(int y, int x, int[] posicao)
+        {
+            var peca = Pecas.Find(p => p.Posicao_X == x && p.Posicao_Y == y);
+            if (posicao[0] == y && posicao[1] == x)
+            {               
+                if (peca != null)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"[{peca.Icone}]");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.Write(Campo[y, x] == 1 ? "[■]" : "[□]");
+                    Console.ResetColor();
+                }               
+            }
+            else
+            {                
+                if (peca != null)
+                {                    
+                    Console.Write($"[{peca.Icone}]");                    
+                }
+                else
+                {               
+                    Console.Write(Campo[y, x] == 1 ? "[■]" : "[□]");                
+                }
+            }                       
+        }
 
-            void MenuMovimento(ref int pos_x, ref int pos_y, ConsoleKeyInfo key, ref bool primeiro_movimento, ref bool segundo_movimento, ref int y1, ref int x1, ref int y2, ref int x2)
+        private void PecaSelecionada(int[] posicao)
+        {
+            var peca = Pecas.Find(p => p.Posicao_Y == posicao[0] && p.Posicao_X == posicao[1]);
+            if (peca != null)
             {
-
-
-                switch (key.Key)
-                {
-                    case ConsoleKey.DownArrow: if (pos_y < 7) pos_y++; break;
-
-                    case ConsoleKey.UpArrow: if (pos_y > 0) pos_y--; break;
-
-                    case ConsoleKey.RightArrow: if (pos_y < 7) pos_x++; break;
-
-                    case ConsoleKey.LeftArrow: if (pos_x > 0) pos_x--; break;
-
-                    case ConsoleKey.Enter:
-                        if (primeiro_movimento)
-                        {
-                            primeiro_movimento = false;
-                            segundo_movimento = true;
-                            y1 = pos_y;
-                            x1 = pos_x;
-                        }
-                        else 
-                        {                       
-                            primeiro_movimento = true;
-                            segundo_movimento = false;
-                            y2 = pos_y;
-                            x2 = pos_x;
-                        }
-                        break;
-                }
+                Console.WriteLine($"Peça Selecionada:{peca.Nome}");
+                Console.WriteLine($"Cor:{peca.Cor}");
+                Console.WriteLine($"Posição:{Utils.Coordenados_Para_Notaçao(peca.Posicao_X, peca.Posicao_Y)}");
 
             }
-
-            static void DescricaoMovimento(int pos_x, int pos_y)
+            else
             {
-                string letra = "?";
-                int numero = 0;
-                switch ((pos_x))
-                {
-                    case 0: letra = "A"; break;
-                    case 1: letra = "B"; break;
-                    case 2: letra = "C"; break;
-                    case 3: letra = "D"; break;
-                    case 4: letra = "E"; break;
-                    case 5: letra = "F"; break;
-                    case 6: letra = "G"; break;
-                    case 7: letra = "H"; break;
-                }
-                switch ((pos_y))
-                {
-                    case 0: numero = 8; break;
-                    case 1: numero = 7; break;
-                    case 2: numero = 6; break;
-                    case 3: numero = 5; break;
-                    case 4: numero = 4; break;
-                    case 5: numero = 3; break;
-                    case 6: numero = 2; break;
-                    case 7: numero = 1; break;
-                }
-                string movimento = letra + numero.ToString();
-                Console.WriteLine($"Campo Atual: {movimento}");
-
+                Console.WriteLine("Nenhuma Peça foi Selecionada");
             }
-
         }
     }
 }

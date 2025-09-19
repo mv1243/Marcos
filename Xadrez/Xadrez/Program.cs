@@ -1,7 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.Text;
 using Xadrez;
 
-Console.OutputEncoding = Encoding.UTF8;
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+Console.WriteLine("Hello, World!");
 Tabuleiro tabuleiro = new Tabuleiro();
-tabuleiro.Implimentar_Tabuleiro();
+tabuleiro.MontarTabuleiro();
