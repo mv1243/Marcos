@@ -35,7 +35,7 @@ namespace Xadrez
                 case 7: numero = 1; break;
             }
             string movimento = letra + numero.ToString();
-            return $"Campo Atual: {movimento}";
+            return movimento;
 
         }
     }

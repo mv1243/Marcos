@@ -18,6 +18,9 @@ namespace Xadrez.Interface
 
         public string Icone { get; set; }
 
+        public bool PreMovimento(int[] posicao, List<IPeca> Pecas);
+
+
 
     }
 }
