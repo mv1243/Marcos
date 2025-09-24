@@ -23,7 +23,7 @@ namespace Xadrez
             { 0, 1, 0, 1, 0, 1, 0, 1}
         };
 
-        List<IPeca> Pecas = [new Rei("Branco", 7, 4), new Rei("Preto", 3, 4) ,new Rei("Preto", 2, 4)];
+        List<IPeca> Pecas = [new Rei("Branco", 7, 0), new Rei("Preto", 1, 1) ,new Rei("Preto", 2, 1)];
 
         public void MontarTabuleiro()
         {
